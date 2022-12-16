@@ -8,9 +8,11 @@ namespace TaskFigure
 {
     public static class CalculaterAreaOfFigure
     {
-        public static double CalculateArea(this Figure figure)
+
+        public static double CalculateArea(Figure figure)
         {
             return figure.СalculateArea();
         }
+
     }
 }

@@ -10,28 +10,22 @@ namespace TaskFigure
         private double sideTwo;
         private double sideThree;
 
+        public Triangle() { }
+
         public Triangle(double sideOne, double sideTwo, double sideThree)
         {
 
-            if (Exists(sideOne, sideTwo, sideThree))
+            if (Exists(Math.Abs(sideOne), Math.Abs(sideTwo), Math.Abs(sideThree)))
             {
                 this.sideOne = Math.Abs(sideOne);
                 this.sideTwo = Math.Abs(sideTwo);
                 this.sideThree = Math.Abs(sideThree);
+            }
+            else
+            {
+
                 throw new TriangleException("Triangle with these sides doesnt exist");
             }
-        }
-
-        public bool CheckTriangleAsRectangular()
-        {
-            double[] sides = new double[] { this.sideOne, this.sideTwo, sideThree };
-            IEnumerable<double> sidesOrder = sides.OrderBy(x => x);
-            int i = 0;
-            foreach (double side in sidesOrder)
-            {
-                sides[i] = side;
-            }
-            return sides[0] * sides[0] == sides[1] * sides[1] + sides[2] * sides[2];
         }
 
         public void GetSide(out double sideOne, out double sideTwo, out double sideThree)
@@ -40,27 +34,47 @@ namespace TaskFigure
             sideTwo = this.sideTwo;
             sideThree = this.sideThree;
         }
+
         public void SetSide(double sideOne, double sideTwo, double sideThree)
         {
-            if (Exists(sideOne, sideTwo, sideThree))
+            if (Exists(Math.Abs(sideOne), Math.Abs(sideTwo), Math.Abs(sideThree)))
             {
                 this.sideOne = Math.Abs(sideOne);
                 this.sideTwo = Math.Abs(sideTwo);
                 this.sideThree = Math.Abs(sideThree);
+            }
+            else
+            {
                 throw new TriangleException("Triangle with these sides doesnt exist");
             }
         }
 
-        private static bool Exists(double sideOne, double sideTwo, double sideThree)
+        public static bool Exists(double sideOne, double sideTwo, double sideThree)
         {
-            return (sideOne + sideTwo > sideThree) && (sideTwo + sideThree > sideOne) && (sideOne + sideThree) > sideTwo;
+            return (sideOne + sideTwo
+                > sideThree) && (sideTwo + sideThree > sideOne) && (sideOne + sideThree) > sideTwo;
         }
 
         public override double СalculateArea()
         {
-            double halfPerimeter = (sideOne + sideTwo + sideThree) / 2;
-            return Math.Sqrt(halfPerimeter * (halfPerimeter - sideOne) * (halfPerimeter - sideTwo) * (halfPerimeter - sideThree));
+            double halfPerimeter = (this.sideOne + this.sideTwo + this.sideThree) / 2;
+            return Math.Sqrt(halfPerimeter * (halfPerimeter - sideOne) * (halfPerimeter - this.sideTwo)
+                * (halfPerimeter - this.sideThree));
         }
+
+        public bool CheckTriangleAsRectangular()
+        {
+            double[] sides = new double[] { this.sideOne, this.sideTwo, sideThree};
+            IEnumerable<double> sidesOrdered = sides.OrderBy(x => x);
+            int i = 0;
+            foreach (double side in sidesOrdered)
+            {
+                sides[i] = side;
+                i++;
+            }
+            return sides[2] * sides[2] == (sides[1] * sides[1]) + sides[0] * sides[0];
+        }
+
         public override string ToString()
         {
             return new string("Triangle : side one = "
@@ -71,6 +85,5 @@ namespace TaskFigure
                 + sideThree.ToString());
         }
     }
-
 }
 
