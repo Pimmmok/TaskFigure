@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TaskFigure
 {
-    class Triangle : Figure
+    public class Triangle : Figure
     {
         private double sideOne;
         private double sideTwo;

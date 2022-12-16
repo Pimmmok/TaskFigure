@@ -1,6 +1,6 @@
 ﻿namespace TaskFigure
 {
-    class Circle : Figure
+    public class Circle : Figure
     {
         private double radius;
         public Circle(double radius)
