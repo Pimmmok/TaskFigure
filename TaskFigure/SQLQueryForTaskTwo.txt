@@ -1,0 +1,1 @@
+﻿select Products.Name, Category.Name from Products JOIN Products_Category on Products.id = Products_Category.id_Products LEFT JOIN Category on Products_Category.id_Category = Category.id;
